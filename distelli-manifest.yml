@@ -1,0 +1,102 @@
+bmcgehee/TravisCI_Example:
+  ############################################################
+  # The Distelli Manifest Reference
+  #    distelli-manifest.yml
+  #
+  # Read more about Distelli Manifests at:
+  #  http://www.distelli.com/docs/distelli-manifest-reference
+  #
+  # The first line must be your:
+  # distelli username (not email)
+  # application name
+  #
+  # as shown above:
+  # USERNAME/APPLICATIONNAME:
+  #
+  ############################################################
+
+  Env:
+    - REPO_TYPE: Git
+    ##########################################################
+    # The Env: Section is where you define 
+    #  your environment variables
+    # One variable REPO_TYPE has been defined above
+    #
+    # Read more about Distelli Environment Variables at:
+    #  https://www.distelli.com/docs/distelli-variables-reference
+    # 
+    # You may need to define others. for example:
+    #- HTML_DIR: /var/www/html/
+    #- PORT: 8006
+    #
+    ##########################################################
+
+  PkgInclude:
+    - '*'
+    ##########################################################
+    # The PkgInclude: Section is where you define
+    #  the files and directories in your application
+    #  that should be bundled for pushs and deploys
+    #
+    # The '*' will pick up all files and directories
+    #
+    # Example: Get the webapp directory and files
+    #- 'webapp/'
+    #
+    ##########################################################
+
+  PreInstall:
+    - echo "Begin PreInstall"
+    ##########################################################
+    # The PreInstall: Section occurs before Install
+    # 
+    # This section is great for download or installing
+    #  prerequisites.
+    #
+    # Example loading prerequisites for Ubuntu
+    #- sudo apt-get -y update
+    #- sudo apt-get -y install php5
+    #- sudo apt-get -y install libapache2-mod-php5
+    #- sudo apt-get -y install apache2
+    #
+    # Example loading prerequisites for CentOS
+    #- sudo yum -y install php
+    #- sudo yum -y install httpd
+    #- sudo firewall-cmd --permanent --zone=public --add-service=http
+    #- sudo firewall-cmd --permanent --zone=public --add-service=https
+    #- sudo firewall-cmd --reload
+    #- sudo systemctl enable httpd
+    #- sudo systemctl start httpd
+    #
+    ##########################################################
+
+  PostInstall:
+    - echo "Begin PostInstall"
+    ##########################################################
+    # The PostInstall: Section occurs after Install
+    #
+    # During the Install Distelli downloads and decompresses
+    #  the application. Which includes files indicated by
+    #  the PkgInclude: section.
+    # Now that the files are available you can interact
+    #  with them.
+    #
+    # Example Copy web files to the web directory
+    #- sudo cp -f ./webapp.php $HTML_DIR/
+    #
+    # Example Symlinking the web files to the web directory
+    #- sudo ln -sf $DISTELLI_APPHOME/webapp/ $HTML_DIR/
+    #
+    ##########################################################
+
+  Start:
+    - echo "Begin Start"
+    ##########################################################
+    # The Start: Section is used to start a service/daemon
+    # Services started in the Start: section are not
+    #  monitored by the Distelli agent
+    #
+    # Example restart of service
+    #- sudo service apache2 restart
+    #
+    ##########################################################
